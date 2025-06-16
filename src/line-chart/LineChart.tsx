@@ -618,9 +618,8 @@ class LineChart extends AbstractChart<LineChartProps, LineChartState> {
     const baseHeight = this.calcBaseHeight(datas, height);
     const xMax = this.getXMaxValues(data);
 
-    let lastPoint: string;
-
     data.forEach((dataset, index) => {
+      let lastPoint: string;
       const points = dataset.data.map((d, i) => {
         if (d === null) return lastPoint;
         const x = (i * (width - paddingRight)) / xMax + paddingRight;
@@ -981,13 +980,15 @@ class LineChart extends AbstractChart<LineChartProps, LineChartState> {
             contentContainerStyle={{ width: width * 2 }}
             showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: { x: scrollableDotHorizontalOffset }
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: { x: scrollableDotHorizontalOffset }
+                  }
                 }
-              }
-            ], { useNativeDriver: false }
+              ],
+              { useNativeDriver: false }
             )}
             horizontal
             bounces={false}
